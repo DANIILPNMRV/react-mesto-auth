@@ -1,0 +1,15 @@
+.place__likebtn {
+    width: 22px;
+    height: 19px;
+    margin-right: 20px;
+    border: none;
+    background-color: transparent;
+    transition: opacity 0.3s linear;
+    cursor: pointer;
+    background-image: url(../../../images/Like-Button.svg);
+    object-fit: cover;
+}
+
+.place__likebtn:hover {
+    opacity: 0.5;
+}

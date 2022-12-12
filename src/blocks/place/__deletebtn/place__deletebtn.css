@@ -1,0 +1,18 @@
+.place__deletebtn {
+  position: absolute;
+  width: 18px;
+  height: 19px;
+  background-color: transparent;
+  margin-top: 20px;
+  margin-left: 244px;
+  padding: 0;
+  border: none;
+  background-image: url(../../../images/Trash-Can.svg);
+  object-fit: cover;
+  cursor: pointer;
+  transition: opacity 0.5s linear;
+}
+
+  .place__deletebtn:hover {
+    opacity: 0.6;
+}

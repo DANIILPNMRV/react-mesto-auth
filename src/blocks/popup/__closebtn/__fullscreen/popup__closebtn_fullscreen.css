@@ -1,0 +1,13 @@
+.popup__closebtn_fullscreen {
+  position: relative;
+  margin-left: calc(100% + 8px);
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .popup__closebtn_fullscreen {
+  width: 20px;
+  height: 20px;
+}
+}

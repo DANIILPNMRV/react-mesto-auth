@@ -1,0 +1,14 @@
+.place {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    min-width: 282px;
+    min-height: 361px;
+    transition: transform 0.8s ease;
+    justify-self: center;
+}
+
+.place:hover {
+    transform: scale(1.02);
+}
