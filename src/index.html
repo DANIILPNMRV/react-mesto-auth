@@ -3,20 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./pages/index.css">
         <title>Mesto Russia</title>
     </head>
 
     <body class="page">
 
         <header class="header">
-            <img src="./images/Mesto-Logo.svg" alt="Логотип Место Россия" class="header__logo">
+            <img src="<%=require('./images/Mesto-Logo.svg')%>" alt="Логотип Место Россия" class="header__logo">
         </header>
         
         <main>
             <section class="profile">
                 <div class="profile__userdata">
-                    <img src="./images/kusto.jpg" alt="Фотография профиля пользователя" class="profile__avatar">
+                    <img src="<%=require('./images/kusto.jpg')%>" alt="Фотография профиля пользователя" class="profile__avatar">
                     <div class="profile__info">
                         <div class="profile__title">
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -33,7 +32,7 @@
                     <template class="template">
                         <li class="place">
                             <button class="place__deletebtn" type="button"></button>
-                            <img src="./images/Edit-Button.svg" alt="Вид на Эльбрус" class="place__image">
+                            <img src="#" alt="Альтернативный текст" class="place__image">
                             <div class="place__bar">
                                 <h3 class="place__title"></h3>
                                 <button class="place__likebtn" type="button"></button>
@@ -81,13 +80,10 @@
         <section class="popup" id="fullScreenImage">
             <div class="popup__card">
                 <button class="popup__closebtn popup__closebtn_fullscreen" type="button" id="imagePopupClose"></button>
-                <img class="popup__photo" src="./images/karechaevo-cherkessiya.jpg" alt="Виды Карачаево-Черкессии">
+                <img class="popup__photo" src="#" alt="Виды Карачаево-Черкессии">
                 <div class="popup__subtitle"></div>
             </div>
         </section>
-        <script type="module" src="./pages/index.js"></script>
-        
-        
     </body>
     
 </html>
