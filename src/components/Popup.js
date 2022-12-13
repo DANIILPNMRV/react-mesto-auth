@@ -5,7 +5,7 @@ export default class Popup {
   }
   //вместо универсальной функции открытия попапа
   open() {
-    document.addEventListener('keydown', this._handleEscClose.bind(this));
+    document.addEventListener('keydown', this._handleEscClose);
     this._popup.classList.add('popup_opened');
   }
 

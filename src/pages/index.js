@@ -2,7 +2,7 @@ import "./index.css"
 import Card  from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import { initialCards } from '../utils/InitialCards.js';
-import PopupWithImage from '../components/PicturePopup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
@@ -19,12 +19,12 @@ const newSection = new Section({
   }, '.places__list');
 
 const createNewCard = (cardInfo) => {
-  const card = new Card(cardInfo, '.template', (name,link) => { openFullSreen.open(name, link) });
+  const card = new Card(cardInfo, '.template', (name,link) => { fullsreenCard.open(name, link) });
   return card.createCard()
 }
 
-const openFullSreen = new PopupWithImage('#fullScreenImage');
-openFullSreen.setEventListeners();
+const fullsreenCard = new PopupWithImage('#fullScreenImage');
+fullsreenCard.setEventListeners();
 
 newSection.renderCards();
 
@@ -39,28 +39,28 @@ const userInfo = new UserInfo({
   subtitleUser: '.profile__subtitle',
 });
 
-const editUserInfo = new PopupWithForm('#profilePopup', (inputValues) => {
-  editUserInfo.close();
+const userInfoEdit = new PopupWithForm('#profilePopup', (inputValues) => {
+  userInfoEdit.close();
   userInfo.setUserInfo(inputValues);
 });
-editUserInfo.setEventListeners();
+userInfoEdit.setEventListeners();
 
 const popupNewPhoto = new PopupWithForm('#picturePopup', (cardInfo) => {
   const card = createNewCard(cardInfo);
   newSection.addItem(card);
   popupNewPhoto.close();
-  cardValidate.deactivateButton();
 });
 popupNewPhoto.setEventListeners();
 
 openButton.addEventListener('click', () => {
-  editUserInfo.setInputValues(userInfo.getUserInfo());
+  userInfoEdit.setInputValues(userInfo.getUserInfo());
   userValidate.deactivateButton();
   userValidate.resetErrors();
-  editUserInfo.open();
+  userInfoEdit.open();
 });
 
 plusButton.addEventListener('click', () => {
   cardValidate.resetErrors();
+  cardValidate.deactivateButton();
   popupNewPhoto.open();
 });
