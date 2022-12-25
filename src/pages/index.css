@@ -18,13 +18,17 @@
 @import url(../blocks/place/__deletebtn/place__deletebtn.css);
 @import url(../blocks/place/__image/place__image.css);
 @import url(../blocks/place/__bar/place__bar.css);
+@import url(../blocks/place/__likecounter/place__likecounter.css);
+@import url(../blocks/place/__likenbr/place__likenbr.css);
 @import url(../blocks/place/__likebtn/place__likebtn.css);
 @import url(../blocks/place/__likebtn/_active/place__likebtn_active.css);
 @import url(../blocks/place/__title/place__title.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__confirmarea/popup__confirmarea.css);
 @import url(../blocks/popup/__area/popup__area.css);
+@import url(../blocks/popup/__avataredit/popup__avataredit.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__closebtn/closebtn.css);
 @import url(../blocks/popup/__closebtn/__fullscreen/popup__closebtn_fullscreen.css);

@@ -1,0 +1,4 @@
+.place__likecounter {
+  display: flex;
+  flex-direction: column;
+}

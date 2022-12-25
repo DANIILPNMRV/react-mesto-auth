@@ -1,0 +1,11 @@
+.popup__avataredit {
+  min-height: 272px;
+  max-height: 272px;
+}
+
+@media screen and (max-width: 767px) {
+  .popup__avataredit {
+  min-height: 272px;
+  max-height: 272px;
+  }
+}

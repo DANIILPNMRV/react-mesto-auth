@@ -1,6 +1,7 @@
 .profile__userdata {
   display: flex;
   flex-direction: row;
+  padding-left: 20.875px;
 }
 
 @media screen and (max-width: 767px) {

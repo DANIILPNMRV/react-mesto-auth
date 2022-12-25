@@ -15,7 +15,7 @@
         <main>
             <section class="profile">
                 <div class="profile__userdata">
-                    <img src="<%=require('./images/kusto.jpg')%>" alt="Фотография профиля пользователя" class="profile__avatar">
+                    <button class="profile__avatar" type="button"></button>
                     <div class="profile__info">
                         <div class="profile__title">
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -35,7 +35,10 @@
                             <img src="#" alt="Альтернативный текст" class="place__image">
                             <div class="place__bar">
                                 <h3 class="place__title"></h3>
-                                <button class="place__likebtn" type="button"></button>
+                                <div class="place__likecounter">
+                                    <button class="place__likebtn" type="button"></button>
+                                    <span class="place__likenbr">0</span>
+                                </div>
                             </div>
                         </li>
                     </template>
@@ -49,7 +52,7 @@
 
        
         
-        <section class="popup" id="profilePopup">
+        <section class="popup popup-profile" id="profilePopup">
             <div class="popup__area">
                 <button class="popup__closebtn" type="button" id="userPopupClose"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
@@ -63,7 +66,7 @@
             </div>
         </section>
         
-        <section class="popup" id="picturePopup">
+        <section class="popup popup-picture" id="picturePopup">
             <div class="popup__area">
                 <button class="popup__closebtn" type="button" id="picturePopupClose"></button>
                 <h2 class="popup__title">Новое место</h2>
@@ -77,13 +80,36 @@
             </div>
         </section>
 
-        <section class="popup" id="fullScreenImage">
+        <section class="popup popup-confirm" id="confirmPopup">
+            <div class="popup__area popup__confirmarea">
+                <button class="popup__closebtn" type="button" id="confirmPopupClose"></button>
+                <h2 class="popup__title">Вы уверены?</h2>
+                <form class="popup__form" name="pictureInfo" novalidate>
+                <button class="popup__savebtn" type="submit" name="confirmBtn">Да</button>
+            </form>
+            </div>
+        </section>
+
+        <section class="popup popup-avatar" id="avatarEditPopup">
+            <div class="popup__area popup__avataredit">
+                <button class="popup__closebtn" type="button" id="confirmPopupClose"></button>
+                <h2 class="popup__title">Обновить аватар</h2>
+                <form class="popup__form" name="avataredit" novalidate>
+                    <input class="popup__input popup__input_type_subtitle" id="avatar-url" type="url" placeholder="Ссылка на картинку" name="link" required>
+                    <span class="popup__input-error" id="avatar-url-error"></span>
+                    <button class="popup__savebtn" type="submit">Сохранить</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="popup popup-image" id="fullScreenImage">
             <div class="popup__card">
                 <button class="popup__closebtn popup__closebtn_fullscreen" type="button" id="imagePopupClose"></button>
                 <img class="popup__photo" src="#" alt="Виды Карачаево-Черкессии">
                 <div class="popup__subtitle"></div>
             </div>
         </section>
+
     </body>
     
 </html>

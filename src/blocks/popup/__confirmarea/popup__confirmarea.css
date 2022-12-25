@@ -1,0 +1,9 @@
+.popup__confirmarea {
+  min-height: 181px;
+}
+
+@media screen and (max-width: 767px) {
+  .popup__confirmarea {
+    min-height: 181px;
+  }
+}

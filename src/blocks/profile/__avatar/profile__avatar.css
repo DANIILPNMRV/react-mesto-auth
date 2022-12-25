@@ -2,6 +2,29 @@
     border-radius: 50%;
     height: 127.5px;
     width: 127px;
-    padding: 0.25px 20.875px;
+    margin-right: 20.875px;
     object-fit: cover;
+    background-image: url(../../../images/kusto.jpg);
+    background-repeat: no-repeat;
+    border: none;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    transition: opscity, 0.7s, linear;
+
+}
+
+.profile__avatar:hover::before {
+  background-image: url(../../../images/pen.svg);
+  content:'';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-size: 26px;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
