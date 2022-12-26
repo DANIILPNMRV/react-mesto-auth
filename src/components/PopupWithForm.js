@@ -17,6 +17,14 @@ export default class PopupWithForm extends Popup {
     }
   }
 
+  waitingUpdateCardPopup(waiting) {
+    if (waiting) {
+      this._submitBtn.textContent = "Сохранение...";
+    } else {
+      this._submitBtn.textContent = "Создать";
+    }
+  }
+
   _getInputValues() {
     this._inputs = {};
     this._inputList.forEach((input) => {
@@ -35,7 +43,6 @@ export default class PopupWithForm extends Popup {
       this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._handleSubmitBtn(this._getInputValues());
-      this.close();
       });
     
     }

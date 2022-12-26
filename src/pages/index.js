@@ -61,18 +61,18 @@ const userInfoEdit = new PopupWithForm('#profilePopup', (data) => {
   userInfoEdit.setEventListeners();
 
   const popupNewPhoto = new PopupWithForm('#picturePopup', (cardInfo) => {
-    popupNewPhoto.waitingUpdate(true);
+    popupNewPhoto.waitingUpdateCardPopup(true);
     const { name, link } = cardInfo;
     api
     .addCard(name, link)
     .then((newCardInfo) => {
       const card = createNewCard(newCardInfo);
       newSection.addItem(card);
-      popupNewPhoto.close();
       cardValidate.deactivateButton();
+      popupNewPhoto.close();
     })
     .catch((err) => console.log(err))
-    .finally(() => popupNewPhoto.waitingUpdate(false));
+    .finally(() => popupNewPhoto.waitingUpdateCardPopup(false));
   });
   popupNewPhoto.setEventListeners();
 
@@ -136,6 +136,7 @@ const createNewCard = (cardInfo) => {
 
 avatarBtn.addEventListener('click', () => {
   avatarValidate.resetErrors();
+  avatarValidate.deactivateButton();
   userProfilePopup.open();
 });
 

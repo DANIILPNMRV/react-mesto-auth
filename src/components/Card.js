@@ -44,8 +44,7 @@ export default class Card {
 
     addLike(plusLikes) {
       this._likes = plusLikes;
-      const counter = this._element.querySelector(".place__likenbr");
-      counter.textContent = this._likes.length;
+      this._counter.textContent = this._likes.length;
 
     if (this.isLiked()) {
       this._likeCard();
@@ -72,14 +71,14 @@ export default class Card {
     this._likeBtn = this._element.querySelector('.place__likebtn');
     this._placeImage.src = this._link; 
     this._placeImage.alt = this._name; 
-    this._placeTitle.textContent = this._name; 
+    this._placeTitle.textContent = this._name;
+    this._counter = this._element.querySelector(".place__likenbr");
     this._setEventListeners(); 
     this.addLike(this._likes);
     if (this._ownerId !== this._userId) {
-      this._deleteBtn.style.display = "none";
-      this._deleteBtn = null;//проверить, занулил как карточку тогда
+      this._deleteBtn.remove();
+      this._deleteBtn = null;
     }
     return this._element;
   }
 }
-  
