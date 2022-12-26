@@ -17,7 +17,7 @@ import {
   avatarBtn } from '../utils/constants.js';
 
 import { api } from '../components/Api.js';
-import { data } from "autoprefixer";
+// import { data } from "autoprefixer"; што это и откуда префиксер???
 
 const userValidate = new FormValidator(validationConfig, profileForm);
 const cardValidate = new FormValidator(validationConfig, pictureForm);
@@ -46,10 +46,10 @@ const userInfo = new UserInfo({
 });
 
 const userInfoEdit = new PopupWithForm('#profilePopup', (data) => {
-  const { name, subtitle } = data;
+  const { username, usersubtitle } = data;
   userInfoEdit.waitingUpdate(true);
   api
-  .editUserProfile(name, subtitle)
+  .editUserProfile(username, usersubtitle)
   .then((data) => {
   userInfo.setUserInfo(data);
   userInfoEdit.close();
@@ -86,7 +86,7 @@ const userProfilePopup = new PopupWithForm('.popup-avatar',
 (data) => {
   userProfilePopup.waitingUpdate(true);
   api
-  updateUserAvatar(data)
+  .updateUserAvatar(data)
   .then((userData) => {
     userInfo.setUserInfo(userData);
     userProfilePopup.close();
@@ -103,7 +103,7 @@ const createNewCard = (cardInfo) => {
     confirmDeletePopup.changeSubmitBtn(() => {
       confirmDeletePopup.waitingUpdate(true);
       api
-      deleteCard(id)
+      .deleteCard(id)
       .then((res) => {
         card.deleteThatCard();
         confirmDeletePopup.close();
@@ -148,28 +148,6 @@ openButton.addEventListener('click', () => {
 
 plusButton.addEventListener('click', () => {
   cardValidate.resetErrors();
-  // cardValidate.deactivateButton();
   popupNewPhoto.open();
 });
-
-// const createNewCard = (cardInfo) => {
-//   const card = new Card(cardInfo, '.template', (name,link) => { fullsreenCard.open(name, link) });
-//   return card.createCard()
-// }
-
-// newSection.renderCards();
-// const userInfoEdit = new PopupWithForm('#profilePopup', (data) => {
-//   userInfoEdit.close();
-//   userInfo.setUserInfo(inputValues);
-// });
-// userInfoEdit.setEventListeners();
-
-
-
-// openButton.addEventListener('click', () => {
-//   userInfoEdit.setInputValues(userInfo.getUserInfo());
-//   userValidate.deactivateButton();
-//   userValidate.resetErrors();
-//   userInfoEdit.open();
-// });
 

@@ -1,7 +1,7 @@
 class Api {
   constructor({ baseUrl, headers }) {
-    this._baseUrl = baseUrl;
     this._headers = headers;
+    this._baseUrl = baseUrl;
   }
 
   getData(res) {
@@ -22,13 +22,13 @@ class Api {
     }).then(this.getData);
   }
 
-  editUserProfile(name, subtitle) {
+  editUserProfile(username, usersubtitle) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        about: subtitle,
+        name: username,
+        about: usersubtitle,
       }),
     }).then(this.getData);
   }
@@ -83,3 +83,4 @@ export const api = new Api({
     "Content-Type": "application/json",
   },
 });
+

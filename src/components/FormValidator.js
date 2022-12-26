@@ -10,10 +10,8 @@ export default class FormValidator {
   }
   _isValid(input) {
     if (!input.validity.valid) {
-      // Если поле не проходит валидацию, покажем ошибку
       this._showInputError(input, input.validationMessage); 
     } else {
-      // Если проходит, скроем
       this._hideInputError(input);
     }
   }
@@ -49,7 +47,6 @@ export default class FormValidator {
     this._activateButton();
     }
   };
- //трем ошибки
   resetErrors() {
     this._inputList.forEach((input) => {
       this._hideInputError(input);

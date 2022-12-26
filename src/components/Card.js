@@ -15,7 +15,8 @@ export default class Card {
     this._handleLikeClick = handleLikeClick;
     this._likes = cardInfo.likes;
     this._userId = userId;
-    this._craetorId = cardInfo.creator._id;
+    this._ownerId = cardInfo.owner._id;
+    this._id = cardInfo._id;
   }
 
    deleteThatCard = () => {
@@ -37,8 +38,8 @@ export default class Card {
     }
 
     isLiked() {
-      const UserSetLike = this._likes.find((user) => user._id === this._userId);
-      return UserSetLike;
+      const userSetLike = this._likes.find((user) => user._id === this._userId);
+      return userSetLike;
     }
 
     addLike(plusLikes) {
@@ -73,8 +74,8 @@ export default class Card {
     this._placeImage.alt = this._name; 
     this._placeTitle.textContent = this._name; 
     this._setEventListeners(); 
-    this._addLike(this._likes);
-    if (this._craetorId !== this._userId) {
+    this.addLike(this._likes);
+    if (this._ownerId !== this._userId) {
       this._deleteBtn.style.display = "none";
       this._deleteBtn = null;//проверить, занулил как карточку тогда
     }
