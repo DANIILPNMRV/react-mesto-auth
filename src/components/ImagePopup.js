@@ -1,4 +1,4 @@
-function PopupWithImage({ card, onClose, onOverlayClick }) {
+function ImagePopup({ card, onClose, onOverlayClick }) {
   return (
     <section className={ card
     ? `popup popup_opened popup-image`
@@ -18,4 +18,4 @@ function PopupWithImage({ card, onClose, onOverlayClick }) {
   );
 }
 
-export default PopupWithImage;
+export default ImagePopup;
