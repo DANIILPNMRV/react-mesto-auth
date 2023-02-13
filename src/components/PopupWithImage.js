@@ -1,16 +1,21 @@
-import Popup from './Popup.js';
-
-export default class PopupWithImage extends Popup {
-  constructor(popupSelector) {
-    super(popupSelector);
-    this._popupPhoto = this._popup.querySelector('.popup__photo');
-    this._popupSubtitle = this._popup.querySelector('.popup__subtitle');
+function PopupWithImage({ card, onClose, onOverlayClick }) {
+  return (
+    <section className={ card
+    ? `popup popup_opened popup-image`
+    : `popup popup-image`
   }
-
-  open(name, link) {
-    super.open();
-    this._popupPhoto.src = link; 
-    this._popupPhoto.setAttribute('alt', name); 
-    this._popupSubtitle.textContent = name;
-  }
+    onClick={onOverlayClick}>
+      <div className="popup__card">
+        <button className="popup__closebtn popup__closebtn_fullscreen" 
+        type="button" id="imagePopupClose" onClick={onClose}></button>
+        <img className="popup__photo"
+        src={card ? card.link : '#'}
+        alt={card ? card.name : ''} />
+        <div className="popup__subtitle">
+        {card ? card.name : ''}</div>
+      </div>
+    </section>
+  );
 }
+
+export default PopupWithImage;
