@@ -65,14 +65,18 @@ class Api {
     }).then(this.getData);
   }
 
-  updateUserAvatar(avatar) {
+  updateProfilePicture(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({
-      avatar: avatar.link,
-      }),
+      body: JSON.stringify(avatar),
     }).then(this.getData);
+  }
+  changeLikeCardStatus(id, isLiked) {
+    if (isLiked) {
+      return this.addLike(id);
+    }
+    return this.deleteLike(id);
   }
 }
 

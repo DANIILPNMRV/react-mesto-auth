@@ -6,6 +6,7 @@ function PopupWithForm({
   onClose,
   onOverlayClick,
   children,
+  onSubmit,
 }) {
   return (
     <section className={
@@ -20,7 +21,8 @@ function PopupWithForm({
           </button>
           <h2 className="popup__title">{title}</h2>
           <form className={`popup__form ${name}-form`}
-            name={name} 
+            name={name}
+            onSubmit={onSubmit}
             noValidate>
             {children}
             <button className="popup__savebtn" type="submit">{buttonText}</button>
