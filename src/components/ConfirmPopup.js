@@ -1,5 +1,4 @@
-import PopupWithForm from "./PopupWithForm"
+import PopupWithForm from "./PopupWithForm";
 
-function ConfirmPopup() {
-}
-export default ConfirmPopup
+function ConfirmPopup() {}
+export default ConfirmPopup;

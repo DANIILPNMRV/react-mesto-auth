@@ -1,15 +1,14 @@
-import Header from './Header';
-import Main from './Main';
-import PopupWithForm from './PopupWithForm';
-import ImagePopup from './ImagePopup';
-import Footer from './Footer';
-import { useState, useEffect } from 'react';
-import { api } from '../utils/Api'
-import CurrentUserContext from '../contexts/CurrentUserContext';
-import AddPlacePopup from './AddPlacePopup';
-import EditAvatarPopup from './EditAvatarPopup';
-import EditProfilePopup from './EditProfilePopup';
-
+import Header from "./Header";
+import Main from "./Main";
+import PopupWithForm from "./PopupWithForm";
+import ImagePopup from "./ImagePopup";
+import Footer from "./Footer";
+import { useState, useEffect } from "react";
+import { api } from "../utils/Api";
+import CurrentUserContext from "../contexts/CurrentUserContext";
+import AddPlacePopup from "./AddPlacePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
+import EditProfilePopup from "./EditProfilePopup";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -22,13 +21,13 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
-      Promise.all([api.getUserAvatar(), api.getInitialCards()])
+    Promise.all([api.getUserAvatar(), api.getInitialCards()])
       .then(([currentUser, cards]) => {
         setCurrentUser(currentUser);
-        setCards(cards);/// попробовать через currentUser - не забыть!
+        setCards(cards); /// попробовать через currentUser - не забыть!
       })
       .catch((error) => console.log(`Ошибка: ${error}`));
-    }, []); 
+  }, []);
 
   const handleOverlayClick = (evt) => {
     if (evt.target === evt.currentTarget) {
@@ -111,54 +110,54 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-    <div className="page">
-      <Header />
-      <Main
-      onEditProfile={handleEditProfileClick}
-      onEditAvatar={handleEditAvatarClick}
-      onAddCard={handleAddPlaceClick}
-      onCardClick={handleCardClick}
-      onCardLike={handleLikeClick}
-      onCardDelete={handleDeleteClick}
-      cards={cards}
-      />
-      <Footer />
-      <PopupWithForm
-      isOpen={isСonfirmPopupOpened}
-      title="Вы уверены?"
-      name="confirm"
-      buttonText="Да"
-      onClose={closeAllPopups}
-      onOverlayClick={handleOverlayClick}>
-      </PopupWithForm>
+      <div className="page">
+        <Header />
+        <Main
+          onEditProfile={handleEditProfileClick}
+          onEditAvatar={handleEditAvatarClick}
+          onAddCard={handleAddPlaceClick}
+          onCardClick={handleCardClick}
+          onCardLike={handleLikeClick}
+          onCardDelete={handleDeleteClick}
+          cards={cards}
+        />
+        <Footer />
+        <PopupWithForm
+          isOpen={isСonfirmPopupOpened}
+          title="Вы уверены?"
+          name="confirm"
+          buttonText="Да"
+          onClose={closeAllPopups}
+          onOverlayClick={handleOverlayClick}
+        ></PopupWithForm>
 
-      <AddPlacePopup
-      isOpen={isPicturePopupOpened}
-      onClose={closeAllPopups}
-      onOverlayClick={handleOverlayClick}
-      onAddPlace={handleAddPlaceSubmit}
-      />
+        <AddPlacePopup
+          isOpen={isPicturePopupOpened}
+          onClose={closeAllPopups}
+          onOverlayClick={handleOverlayClick}
+          onAddPlace={handleAddPlaceSubmit}
+        />
 
-      <EditAvatarPopup
-      isOpen={isAvatarPopupOpened}
-      onClose={closeAllPopups}
-      onOverlayClick={handleOverlayClick}
-      onUpdateAvatar={handleUpdateAvatar}
-      />
+        <EditAvatarPopup
+          isOpen={isAvatarPopupOpened}
+          onClose={closeAllPopups}
+          onOverlayClick={handleOverlayClick}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
 
-      <EditProfilePopup
-      isOpen={isProfilePopupOpened}
-      onClose={closeAllPopups}
-      onOverlayClick={handleOverlayClick}
-      onUpdateUser={handleUpdateUser}
-      />
+        <EditProfilePopup
+          isOpen={isProfilePopupOpened}
+          onClose={closeAllPopups}
+          onOverlayClick={handleOverlayClick}
+          onUpdateUser={handleUpdateUser}
+        />
 
-      <ImagePopup
-      card={selectedCard}
-      onClose={closeAllPopups}
-      onOverlayClick={handleOverlayClick}
-      />
-    </div>
+        <ImagePopup
+          card={selectedCard}
+          onClose={closeAllPopups}
+          onOverlayClick={handleOverlayClick}
+        />
+      </div>
     </CurrentUserContext.Provider>
   );
 }

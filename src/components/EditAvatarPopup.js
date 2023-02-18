@@ -1,8 +1,9 @@
-import PopupWithForm from './PopupWithForm';
-import React, { useRef } from 'react';
+import PopupWithForm from "./PopupWithForm";
+import React, { useRef, useState, useEffect } from "react";
 
 function EditAvatarPopup({ isOpen, onClose, onOverlayClick, onUpdateAvatar }) {
   const inputRefObj = useRef();
+  const [link, setLink] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -10,8 +11,14 @@ function EditAvatarPopup({ isOpen, onClose, onOverlayClick, onUpdateAvatar }) {
       avatar: inputRefObj.current.value,
     });
   }
+  function handleInputLink(evt) {
+    setLink(evt.target.value);
+  }
+  useEffect(() => {
+    setLink("");
+  }, [isOpen]);
 
-  return(
+  return (
     <PopupWithForm
       isOpen={isOpen}
       title="Обновить аватар"
@@ -19,8 +26,9 @@ function EditAvatarPopup({ isOpen, onClose, onOverlayClick, onUpdateAvatar }) {
       buttonText="Сохранить"
       onClose={onClose}
       onOverlayClick={onOverlayClick}
-      onSubmit={handleSubmit}>
-        <input
+      onSubmit={handleSubmit}
+    >
+      <input
         className="popup__input popup__input_type_subtitle"
         id="avatar-url"
         type="url"
@@ -28,12 +36,11 @@ function EditAvatarPopup({ isOpen, onClose, onOverlayClick, onUpdateAvatar }) {
         name="link"
         required=""
         ref={inputRefObj}
-        />
-        <span
-        className="popup__input-error"
-        id="avatar-url-error">
-        </span>
-      </PopupWithForm>
+        value={link}
+        onChange={handleInputLink}
+      />
+      <span className="popup__input-error" id="avatar-url-error"></span>
+    </PopupWithForm>
   );
 }
 export default EditAvatarPopup;

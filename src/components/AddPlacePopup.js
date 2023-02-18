@@ -1,9 +1,9 @@
-import PopupWithForm from './PopupWithForm';
-import React, { useState } from 'react';
+import PopupWithForm from "./PopupWithForm";
+import React, { useState, useEffect } from "react";
 
 function AddPlacePopup({ isOpen, onClose, onOverlayClick, onAddPlace }) {
-  const [title, setTitle] = useState('');
-  const [link, setLink] = useState('');
+  const [title, setTitle] = useState("");
+  const [link, setLink] = useState("");
 
   function handleInputTitle(evt) {
     setTitle(evt.target.value);
@@ -17,32 +17,35 @@ function AddPlacePopup({ isOpen, onClose, onOverlayClick, onAddPlace }) {
     onAddPlace(title, link);
   }
 
-    return(
-      <PopupWithForm
+  useEffect(() => {
+    setTitle("");
+    setLink("");
+  }, [isOpen]);
+
+  return (
+    <PopupWithForm
       isOpen={isOpen}
       title="Новое место"
       name="picture"
       buttonText="Создать"
       onClose={onClose}
       onOverlayClick={onOverlayClick}
-      onSubmit={handleSubmit}>
-        <input
+      onSubmit={handleSubmit}
+    >
+      <input
         className="popup__input popup__input_type_name"
         id="mesto-name"
         type="text"
         placeholder="Название"
         name="name"
         required=""
-        minLength="2" 
+        minLength="2"
         maxLength="30"
         value={title}
         onChange={handleInputTitle}
-        />
-        <span
-        className="popup__input-error"
-        id="mesto-name-error">
-        </span>
-        <input
+      />
+      <span className="popup__input-error" id="mesto-name-error"></span>
+      <input
         className="popup__input popup__input_type_subtitle"
         id="mesto-url"
         type="url"
@@ -51,12 +54,9 @@ function AddPlacePopup({ isOpen, onClose, onOverlayClick, onAddPlace }) {
         required=""
         value={link}
         onChange={handleInputLink}
-        />
-        <span
-        className="popup__input-error"
-        id="mesto-url-error">
-        </span>
-      </PopupWithForm>
-    )
+      />
+      <span className="popup__input-error" id="mesto-url-error"></span>
+    </PopupWithForm>
+  );
 }
 export default AddPlacePopup;
