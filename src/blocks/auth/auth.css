@@ -1,0 +1,7 @@
+.auth {
+  margin: auto;
+  padding: 60px 0px 80px;
+  height: calc(100vh - 120px);
+  max-width: 880px;
+  box-sizing: border-box;
+}

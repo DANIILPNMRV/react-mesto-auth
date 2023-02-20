@@ -1,0 +1,16 @@
+.auth-form__savebtn {
+  width: 100%;
+  margin: 216px auto 18px;
+  background-color: white;
+  color: black;
+}
+
+.auth-form__savebtn:hover {
+  opacity: 0.85;
+}
+
+.auth-form__savebtn:disabled {
+  color: #a0a0a0;
+  opacity: 0.5;
+  cursor: default;
+}

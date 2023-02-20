@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 
 function EditProfilePopup({ isOpen, onClose, onOverlayClick, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
-  const [description, setDescription] = useState(""); //это subtitle - теперь дескрипшн
+  const [description, setDescription] = useState("");
   const [name, setName] = useState("");
 
   function handleSubmit(e) {
@@ -46,8 +46,7 @@ function EditProfilePopup({ isOpen, onClose, onOverlayClick, onUpdateUser }) {
         minLength="2"
         maxLength="40"
         onChange={handleNameChange}
-        value={name || ""} //при отсут. альтернативы эл-нт будет неотслеживаемым и приведет к ворнингу
-        //undefined или null и не должны сюда падать - не ошибка по чек-листу, уточнить
+        value={name || ""} 
       />
       <span className="popup__input-error" id="user-name-error"></span>
       <input

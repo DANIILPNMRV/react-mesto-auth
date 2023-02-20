@@ -3,14 +3,22 @@ import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import Footer from "./Footer";
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { api } from "../utils/Api";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import AddPlacePopup from "./AddPlacePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import EditProfilePopup from "./EditProfilePopup";
+import Login from "./Login.js";
+import ProtectedRoute from "./ProtectedRoute.js";
+import * as auth from "../utils/auth";
+import InfoTooltip from "./InfoTooltip";
+import Register from "./Register";
 
 function App() {
+  const navigate = useNavigate();
+
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
@@ -20,14 +28,38 @@ function App() {
   const [isСonfirmPopupOpened, setIsСonfirmPopupOpened] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
 
+  const [isInfoPopupOpened, setInfoPopupOpened] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState("");
+  const [isSuccessful, setIsSuccessful] = useState(false);
+
   useEffect(() => {
-    Promise.all([api.getUserAvatar(), api.getInitialCards()])
-      .then(([currentUser, cards]) => {
-        setCurrentUser(currentUser);
-        setCards(cards); /// попробовать через currentUser - не забыть!
-      })
-      .catch((error) => console.log(`Ошибка: ${error}`));
-  }, []);
+    if (loggedIn) {
+      Promise.all([api.getUserAvatar(), api.getInitialCards()])
+        .then(([currentUser, cards]) => {
+          setCurrentUser(currentUser);
+          setCards(cards);
+        })
+        .catch((error) => console.log(`Ошибка: ${error}`));
+    }
+  }, [loggedIn]); //пригодился, сюда - логгед
+
+  //что будет при 1ом входе?
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      auth
+        .getContent(jwt)
+        .then((res) => {
+          setLoggedIn(true);
+          setEmail(res.data.email);
+          navigate('/');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [navigate]);
 
   const handleOverlayClick = (evt) => {
     if (evt.target === evt.currentTarget) {
@@ -47,12 +79,16 @@ function App() {
   function handleCardClick(selectedCard) {
     setSelectedCard(selectedCard);
   }
+  function handleInfoPopupClick() {
+    setInfoPopupOpened(true);
+  }
   function closeAllPopups() {
     setSelectedCard(null);
     setIsAvatarPopupOpened(false);
     setIsProfilePopupOpened(false);
     setIsPicturePopupOpened(false);
     setIsСonfirmPopupOpened(false);
+    setInfoPopupOpened(false);
   }
   // api лайки
   function handleLikeClick(card) {
@@ -97,6 +133,50 @@ function App() {
       })
       .catch((error) => console.log(`Ошибка: ${error}`));
   }
+
+  //регистрация юзера
+  function handleRegister(email, password) {
+    return auth
+      .register(email, password)
+      .then(() => {
+        handleInfoPopupClick();
+        setIsSuccessful(true);
+        navigate('/sign-in');
+      })
+      .catch((err) => {
+        handleInfoPopupClick();
+        setIsSuccessful(false);
+        console.log(err);
+      });
+  }
+
+  //логин юзера
+  function handleLogin(email, password) {
+    return auth
+      .login(email, password)
+      .then((data) => {
+        if (data) {
+          localStorage.setItem("jwt", data.token);
+          setLoggedIn(true);
+          setEmail(email);
+          navigate('/');
+        }
+      })
+      .catch((err) => {
+        handleInfoPopupClick();
+        setIsSuccessful(false);
+        console.log(err);
+      });
+  }
+
+  //выход юзера - забираем токен
+  function signOut() {
+    localStorage.removeItem("jwt");
+    navigate('/sign-in');
+    setLoggedIn(false);
+    setEmail("");
+  }
+
   //api новая card
   function handleAddPlaceSubmit(name, link) {
     api
@@ -111,17 +191,56 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header />
-        <Main
-          onEditProfile={handleEditProfileClick}
-          onEditAvatar={handleEditAvatarClick}
-          onAddCard={handleAddPlaceClick}
-          onCardClick={handleCardClick}
-          onCardLike={handleLikeClick}
-          onCardDelete={handleDeleteClick}
-          cards={cards}
-        />
-        <Footer />
+        <Header email={email} loggedIn={loggedIn} onSignOut={signOut} />
+        <Routes>
+          <Route
+            path="/sign-up"
+            element={
+              <Register
+                handleRegister={handleRegister}
+                name="register"
+                title="Регистрация"
+                buttonText="Зарегистрироваться"
+              />
+            }
+          />
+          <Route
+            path="/sign-in"
+            element={
+              <Login
+                handleLogin={handleLogin}
+                name="login"
+                title="Вход"
+                buttonText="Войти"
+              />
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <>
+                <ProtectedRoute
+                  element={Main}
+                  loggedIn={loggedIn}
+                  onEditProfile={handleEditProfileClick}
+                  onEditAvatar={handleEditAvatarClick}
+                  onAddCard={handleAddPlaceClick}
+                  onCardClick={handleCardClick}
+                  onCardLike={handleLikeClick}
+                  onCardDelete={handleDeleteClick}
+                  cards={cards}
+                />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              loggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />
+            }
+          />
+        </Routes>
         <PopupWithForm
           isOpen={isСonfirmPopupOpened}
           title="Вы уверены?"
@@ -151,7 +270,12 @@ function App() {
           onOverlayClick={handleOverlayClick}
           onUpdateUser={handleUpdateUser}
         />
-
+        <InfoTooltip
+          isOpen={isInfoPopupOpened}
+          onClose={closeAllPopups}
+          isSuccessful={isSuccessful}
+          onOverlayClick={handleOverlayClick}
+        />
         <ImagePopup
           card={selectedCard}
           onClose={closeAllPopups}
