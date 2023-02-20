@@ -5,4 +5,5 @@
   max-width: 141px;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: default;
 }

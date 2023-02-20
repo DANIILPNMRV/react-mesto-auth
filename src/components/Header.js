@@ -5,6 +5,7 @@ function Header({ email, onSignOut}) {
   return (
     <header className="header">
       <img src={logo} alt="Логотип Место Россия" className="header__logo" />
+      <div className="header__menu">
       <Routes>
         <Route
           path="/sign-in"
@@ -32,7 +33,7 @@ function Header({ email, onSignOut}) {
           path="/"
           element={
             <>
-              <div className="header__menu">
+              
                 <p className="header__email">{email}</p>
                 <button
                   type="button"
@@ -41,11 +42,12 @@ function Header({ email, onSignOut}) {
                 >
                   Выйти
                 </button>
-              </div>
+              
             </>
           }
         />
       </Routes>
+      </div>
     </header>
   );
 }

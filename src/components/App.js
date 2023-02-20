@@ -16,6 +16,7 @@ import * as auth from "../utils/auth";
 import InfoTooltip from "./InfoTooltip";
 import Register from "./Register";
 
+
 function App() {
   const navigate = useNavigate();
 

@@ -5,11 +5,12 @@
   margin: 17px 0 0;
   padding: 0;
   outline: none;
+  border: none;
   border-bottom: 2px solid #cccccc;
   box-sizing: border-box;
-  border: none;
   background-color: black;
   line-height: 17px;
+  color: white;
 }
 
 .auth-form__input ::placeholder {
