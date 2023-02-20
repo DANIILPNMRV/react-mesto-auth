@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-function Login({ handleLogin, buttonText}) {
+function Login({ handleLogin, buttonText }) {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -9,10 +9,10 @@ function Login({ handleLogin, buttonText}) {
   function handleUserDataChange(evt) {
     const { name, value } = evt.target;
 
-  setUserData({
-    ...userData,
-    [name]: value,
-  });
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
   }
 
   function handleSubmit(evt) {
@@ -21,30 +21,29 @@ function Login({ handleLogin, buttonText}) {
       return;
     }
     handleLogin(userData.email, userData.password);
-  };
+  }
 
   return (
     <section className="auth">
-      <form className="auth-form"
-      onSubmit={handleSubmit}>
+      <form className="auth-form" onSubmit={handleSubmit}>
         <h2 className="auth-form__title">Вход</h2>
         <input
-        className="auth-form__input"
-        type="email"
-        name="email"
-        placeholder="Email"
-        required
-        onChange={handleUserDataChange}
-        value={userData.email || ''}
+          className="auth-form__input"
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          onChange={handleUserDataChange}
+          value={userData.email || ""}
         />
         <input
-        className="auth-form__input"
-        type="password"
-        name="password"
-        placeholder="Пароль"
-        required
-        onChange={handleUserDataChange}
-        value={userData.password || ''}
+          className="auth-form__input"
+          type="password"
+          name="password"
+          placeholder="Пароль"
+          required
+          onChange={handleUserDataChange}
+          value={userData.password || ""}
         />
         <button
           className="auth-form__savebtn popup__savebtn"
@@ -55,6 +54,6 @@ function Login({ handleLogin, buttonText}) {
         </button>
       </form>
     </section>
-  )
+  );
 }
 export default Login;

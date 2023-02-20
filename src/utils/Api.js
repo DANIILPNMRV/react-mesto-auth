@@ -13,8 +13,9 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-    headers: this._headers, }).then(this.getData);
-    }
+      headers: this._headers,
+    }).then(this.getData);
+  }
 
   getUserAvatar() {
     return fetch(`${this._baseUrl}/users/me`, {

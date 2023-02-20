@@ -3,8 +3,8 @@ import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import Footer from "./Footer";
-import { useState, useEffect } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { api } from "../utils/Api";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import AddPlacePopup from "./AddPlacePopup";
@@ -15,7 +15,6 @@ import ProtectedRoute from "./ProtectedRoute.js";
 import * as auth from "../utils/auth";
 import InfoTooltip from "./InfoTooltip";
 import Register from "./Register";
-
 
 function App() {
   const navigate = useNavigate();
@@ -54,7 +53,7 @@ function App() {
         .then((res) => {
           setLoggedIn(true);
           setEmail(res.data.email);
-          navigate('/');
+          navigate("/");
         })
         .catch((err) => {
           console.log(err);
@@ -142,7 +141,7 @@ function App() {
       .then(() => {
         handleInfoPopupClick();
         setIsSuccessful(true);
-        navigate('/sign-in');
+        navigate("/sign-in");
       })
       .catch((err) => {
         handleInfoPopupClick();
@@ -160,7 +159,7 @@ function App() {
           localStorage.setItem("jwt", data.token);
           setLoggedIn(true);
           setEmail(email);
-          navigate('/');
+          navigate("/");
         }
       })
       .catch((err) => {
@@ -173,7 +172,7 @@ function App() {
   //выход юзера - забираем токен
   function signOut() {
     localStorage.removeItem("jwt");
-    navigate('/sign-in');
+    navigate("/sign-in");
     setLoggedIn(false);
     setEmail("");
   }

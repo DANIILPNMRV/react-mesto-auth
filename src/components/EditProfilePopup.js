@@ -46,7 +46,7 @@ function EditProfilePopup({ isOpen, onClose, onOverlayClick, onUpdateUser }) {
         minLength="2"
         maxLength="40"
         onChange={handleNameChange}
-        value={name || ""} 
+        value={name || ""}
       />
       <span className="popup__input-error" id="user-name-error"></span>
       <input
