@@ -11,9 +11,11 @@
 * JSX
 * hooks
 * API
-* 
 
 ### Скрипты
 
 Билд - npm run build
 Дев - npm run start
+
+### Ссылка на проект
+https://daniilpnmrv.github.io/react-mesto-auth/
